@@ -1,0 +1,79 @@
+{
+  "trip_id": "synthetic-paris-delay-001",
+  "synthetic": true,
+  "event": {
+    "type": "flight_delayed",
+    "node_id": "flight_icn_cdg",
+    "delay_minutes": 300
+  },
+  "nodes": [
+    {
+      "id": "flight_icn_cdg",
+      "kind": "flight",
+      "scheduled_start": "2026-09-01T09:00:00+09:00",
+      "scheduled_end": "2026-09-01T14:00:00+02:00",
+      "duration_minutes": 0,
+      "approval": "auto_information_allowed"
+    },
+    {
+      "id": "airport_to_hotel",
+      "kind": "transfer",
+      "scheduled_start": "2026-09-01T15:00:00+02:00",
+      "scheduled_end": "2026-09-01T16:00:00+02:00",
+      "duration_minutes": 60,
+      "requires": ["flight_icn_cdg"],
+      "approval": "counselor_approval_required"
+    },
+    {
+      "id": "hotel_checkin",
+      "kind": "hotel_checkin",
+      "scheduled_start": "2026-09-01T16:30:00+02:00",
+      "scheduled_end": "2026-09-01T16:30:00+02:00",
+      "duration_minutes": 0,
+      "requires": ["airport_to_hotel"],
+      "late_checkin_policy": "confirmation_required",
+      "approval": "counselor_confirmation_required"
+    },
+    {
+      "id": "first_day_tour",
+      "kind": "tour",
+      "scheduled_start": "2026-09-01T18:00:00+02:00",
+      "scheduled_end": "2026-09-01T20:00:00+02:00",
+      "duration_minutes": 0,
+      "requires": ["hotel_checkin"],
+      "buffer_after_requirements_minutes": 35,
+      "approval": "counselor_approval_required"
+    },
+    {
+      "id": "paris_to_lyon",
+      "kind": "ground_transport",
+      "scheduled_start": "2026-09-02T08:00:00+02:00",
+      "scheduled_end": "2026-09-02T10:00:00+02:00",
+      "duration_minutes": 0,
+      "approval": "auto_information_allowed"
+    }
+  ],
+  "alternatives": [
+    {
+      "id": "alternative_a_next_day",
+      "label": "다음날 11:00 대체 투어 확인",
+      "start": "2026-09-02T11:00:00+02:00",
+      "policy": "supplier_confirmation_required",
+      "price_difference": "unknown"
+    },
+    {
+      "id": "alternative_b_night",
+      "label": "당일 22:00 야간 투어 확인",
+      "start": "2026-09-01T22:00:00+02:00",
+      "policy": "change_allowed_with_price_difference",
+      "price_difference": "unknown"
+    },
+    {
+      "id": "alternative_c_keep_original",
+      "label": "기존 18:00 투어 유지",
+      "start": "2026-09-01T18:00:00+02:00",
+      "policy": "not_applicable",
+      "price_difference": "none"
+    }
+  ]
+}

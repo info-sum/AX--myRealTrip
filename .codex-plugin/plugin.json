@@ -1,0 +1,9 @@
+{
+  "name": "trip-graph-rescue",
+  "version": "0.1.0",
+  "description": "Synthetic travel disruption impact analysis with deterministic approval gates",
+  "skills": ["skills/trip-graph-rescue/SKILL.md"],
+  "entrypoint": "scripts/analyze_trip.py",
+  "capabilities": ["read_synthetic_json", "analyze_trip_graph", "draft_customer_message"],
+  "prohibited_capabilities": ["refund", "rebook", "send_message", "production_api"]
+}
